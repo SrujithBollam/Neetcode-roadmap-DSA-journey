@@ -1,0 +1,21 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if ( strs.length == 0) {
+            return new ArrayList<>();
+        }
+
+        HashMap<String, List<String>> mapbox = new HashMap<>();
+
+        for (String s : strs) {
+            int[]  frequency = new int [26];
+            for (char ch : s.toCharArray()) {
+                frequency[ch - 'a']++;
+            }
+
+            String key = Arrays.toString(frequency);
+            mapbox.putIfAbsent(key, new ArrayList<>());
+            mapbox.get(key).add(s);
+        }
+        return new ArrayList<>(mapbox.values());
+    }
+}
